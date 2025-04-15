@@ -1,0 +1,36 @@
+services:
+  postgres:
+    image: 'postgres:latest'
+    container_name: 'postgres-production'
+    environment:
+      - 'POSTGRES_DB=tourna-master'
+      - 'POSTGRES_PASSWORD=8p05u;J7t1,F'
+      - 'POSTGRES_USER=root'
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    restart: unless-stopped
+    ports:
+      - '5424:5432'
+    networks:
+      - tourna-network
+
+  app:
+    image: tourna-master-api
+    container_name: tourna-master
+    depends_on:
+      - postgres
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/tourna-master
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=8p05u;J7t1,F
+    ports:
+      - '8080:8080'
+    networks:
+      - tourna-network
+
+networks:
+  tourna-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
