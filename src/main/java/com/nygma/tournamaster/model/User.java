@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 
-import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -25,7 +24,6 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
     private RoleEnum role;

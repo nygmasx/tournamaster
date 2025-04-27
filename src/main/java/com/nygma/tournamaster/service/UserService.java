@@ -21,8 +21,7 @@ public class UserService {
 
     public User getUserById(UUID id) {
         Optional<User> user = userRepository.findById(id);
-        User userFound = user.orElse(null);
 
-        return userFound;
+        return user.orElse(null);
     }
 }
